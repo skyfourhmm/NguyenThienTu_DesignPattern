@@ -1,1 +1,0 @@
-"# NguyenThienTu_DesignPattern" 
