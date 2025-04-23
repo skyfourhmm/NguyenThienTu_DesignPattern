@@ -1,0 +1,20 @@
+# Sử dụng golang:1.18-alpine làm base image
+FROM golang:1.18-alpine
+
+# Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# Sao chép mã nguồn Go vào thư mục làm việc trong container
+COPY . /app
+
+# Khởi tạo module Go và tải các dependencies
+RUN go mod init my-go-app && go mod tidy
+
+# Build ứng dụng Go
+RUN go build -o main .
+
+# Mở cổng 8080 để phục vụ ứng dụng
+EXPOSE 8080
+
+# Chạy ứng dụng Go
+CMD ["./main"]

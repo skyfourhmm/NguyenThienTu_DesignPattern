@@ -1,0 +1,18 @@
+# Chọn image node:18 làm base image
+FROM node:18
+
+# Tạo thư mục làm việc trong container
+WORKDIR /app
+
+# Sao chép package.json và cài đặt dependencies
+COPY package.json /app
+RUN npm install
+
+# Sao chép mã nguồn ứng dụng vào thư mục làm việc
+COPY . /app
+
+# Mở cổng 3000
+EXPOSE 3000
+
+# Chạy ứng dụng Node.js
+CMD ["node", "app.js"]

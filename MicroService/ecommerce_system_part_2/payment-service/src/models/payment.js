@@ -1,27 +1,27 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const Order = sequelize.define("Order", {
-  customerName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  product: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  quantity: {
+const Payment = sequelize.define("Payment", {
+  orderId: {
     type: DataTypes.INTEGER,
-    defaultValue: 1,
+    allowNull: false,
   },
-  totalPrice: {
+  amount: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  paymentMethod: {
+    type: DataTypes.ENUM("credit_card", "paypal", "cod", "bank_transfer"),
+    allowNull: false,
+  },
   status: {
-    type: DataTypes.ENUM("pending", "completed", "cancelled"),
+    type: DataTypes.ENUM("pending", "successful", "failed", "refunded"),
     defaultValue: "pending",
+  },
+  paidAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
   },
 });
 
-module.exports = Order;
+module.exports = Payment;
